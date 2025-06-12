@@ -14,3 +14,20 @@ class WebScraperApp:
         master.geometry("800x600")
         master.grid_columnconfigure(0, weight=1)
         master.grid_rowconfigure(3, weight=1)
+         # Create widgets
+        self.create_widgets()
+
+    def create_widgets(self):
+        # URL Entry
+        ttk.Label(self.master, text="Enter URL:").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
+        self.url_entry = ttk.Entry(self.master, width=50)
+        self.url_entry.grid(row=0, column=0, padx=5, pady=5, sticky=tk.EW)
+
+        # Buttons Frame
+        button_frame = ttk.Frame(self.master)
+        button_frame.grid(row=1, column=0, padx=5, pady=5, sticky=tk.EW)
+
+        
+
+
+        
