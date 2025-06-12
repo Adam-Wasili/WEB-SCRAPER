@@ -117,6 +117,15 @@ class WebScraperApp:
             self.master.after(0, self._display_ip, None, str(e))
         finally:
             self.master.after(0, self.toggle_buttons, True)
+            
+    def _display_ip(self, ip, error):
+        if error:
+            self.update_status(f"Error: {error}")
+            self.ip_label.config(text="IP Address: ")
+            return
+
+        self.ip_label.config(text=f"IP Address: {ip}")
+        self.update_status("IP address fetched successfully")
         
 
 
