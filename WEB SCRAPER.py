@@ -127,6 +127,11 @@ class WebScraperApp:
         self.ip_label.config(text=f"IP Address: {ip}")
         self.update_status("IP address fetched successfully")
         
+    def toggle_buttons(self, state):
+        self.fetch_html_btn.config(state=tk.NORMAL if state else tk.DISABLED)
+        self.fetch_ip_btn.config(state=tk.NORMAL if state else tk.DISABLED)
+
+        
 
 
         
