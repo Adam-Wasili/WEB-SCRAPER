@@ -22,6 +22,11 @@ class WebScraperApp:
         ttk.Label(self.master, text="Enter URL:").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
         self.url_entry = ttk.Entry(self.master, width=50)
         self.url_entry.grid(row=0, column=0, padx=5, pady=5, sticky=tk.EW)
+        
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = WebScraperApp(root)
+    root.mainloop()
 
         # Buttons Frame
         button_frame = ttk.Frame(self.master)
