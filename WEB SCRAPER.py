@@ -68,6 +68,39 @@ class WebScraperApp:
 
         thread = threading.Thread(target=self._fetch_html_thread, args=(url,))
         thread.start()
+        
+    def _fetch_html_thread(self, url):
+        try:
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            html_content = response.text
+            self.master.after(0, self._display_html, html_content, None)
+        except Exception as e:
+            self.master.after(0, self._display_html, None, str(e))
+        finally:
+            self.master.after(0, self.toggle_buttons, True)
+
+    def _display_html(self, content, error):
+        if error:
+            self.update_status(f"Error: {error}")
+            return
+
+        self.html_display.delete('1.0', tk.END)
+        self.html_display.insert(tk.END, content)
+        self.update_status("HTML content fetched successfully")
+
+    def fetch_ip(self):
+        url = self.url_entry.get().strip()
+        if not url:
+            self.update_status("Error: URL cannot be empty")
+            return
+
+        self.toggle_buttons(False)
+        self.update_status("Fetching IP address...")
+
+        thread = threading.Thread(target=self._fetch_ip_thread, args=(url,))
+        thread.start()
+
 
         
 
