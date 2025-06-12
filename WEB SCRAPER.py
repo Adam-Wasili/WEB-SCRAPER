@@ -26,6 +26,22 @@ class WebScraperApp:
         # Buttons Frame
         button_frame = ttk.Frame(self.master)
         button_frame.grid(row=1, column=0, padx=5, pady=5, sticky=tk.EW)
+        
+        # Fetch HTML Button
+        self.fetch_html_btn = ttk.Button(
+            button_frame,
+            text="Fetch HTML",
+            command=self.fetch_html
+        )
+        self.fetch_html_btn.pack(side=tk.LEFT, padx=2)
+
+        # Fetch IP Button
+        self.fetch_ip_btn = ttk.Button(
+            button_frame,
+            text="Fetch IP Address",
+            command=self.fetch_ip
+        )
+        self.fetch_ip_btn.pack(side=tk.LEFT, padx=2)
 
         
 
