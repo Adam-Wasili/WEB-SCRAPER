@@ -100,6 +100,24 @@ class WebScraperApp:
 
         thread = threading.Thread(target=self._fetch_ip_thread, args=(url,))
         thread.start()
+        
+    def _fetch_ip_thread(self, url):
+        try:
+            # Add protocol if missing for proper parsing
+            if not url.startswith(('http://', 'https://')):
+                url = 'http://' + url
+
+            parsed_url = urlparse(url)
+            domain = parsed_url.netloc
+
+            # Get IP address
+            ip = socket.gethostbyname(domain)
+            self.master.after(0, self._display_ip, ip, None)
+        except Exception as e:
+            self.master.after(0, self._display_ip, None, str(e))
+        finally:
+            self.master.after(0, self.toggle_buttons, True)
+        
 
 
         
