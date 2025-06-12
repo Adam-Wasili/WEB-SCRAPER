@@ -130,6 +130,12 @@ class WebScraperApp:
     def toggle_buttons(self, state):
         self.fetch_html_btn.config(state=tk.NORMAL if state else tk.DISABLED)
         self.fetch_ip_btn.config(state=tk.NORMAL if state else tk.DISABLED)
+          def update_status(self, message):
+        self.status_bar.config(text=message)
+        # Clear status after 5 seconds
+        self.master.after(5000, lambda: self.status_bar.config(text=""))
+
+
 
         
 
