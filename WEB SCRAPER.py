@@ -42,6 +42,32 @@ class WebScraperApp:
             command=self.fetch_ip
         )
         self.fetch_ip_btn.pack(side=tk.LEFT, padx=2)
+          # HTML Display
+        self.html_display = scrolledtext.ScrolledText(self.master, wrap=tk.WORD)
+        self.html_display.grid(row=2, column=0, padx=5, pady=5, sticky=tk.NSEW)
+
+        # IP Display
+        self.ip_label = ttk.Label(self.master, text="IP Address: ")
+        self.ip_label.grid(row=3, column=0, padx=5, pady=5, sticky=tk.SW)
+
+        # Status Bar
+        self.status_bar = ttk.Label(self.master, text="", relief=tk.SUNKEN)
+        self.status_bar.grid(row=4, column=0, padx=5, pady=5, sticky=tk.EW)
+
+    def fetch_html(self):
+        url = self.url_entry.get().strip()
+        if not url:
+            self.update_status("Error: URL cannot be empty")
+            return
+        if not url.startswith(('http://', 'https://')):
+            self.update_status("Error: URL must include http:// or https://")
+            return
+
+        self.toggle_buttons(False)
+        self.update_status("Fetching HTML...")
+
+        thread = threading.Thread(target=self._fetch_html_thread, args=(url,))
+        thread.start()
 
         
 
